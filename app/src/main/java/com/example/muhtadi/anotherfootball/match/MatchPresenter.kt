@@ -6,13 +6,14 @@ import com.example.muhtadi.anotherfootball.model.MatchResponse
 import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.util.*
 
-class MatchPresenter(private val view: MatchView,
+class MatchPresenter(private val view: MatchView?,
                      private val apiRepository: ApiRepository,
                      private val gson: Gson) {
 
-    fun getLastMatch(league: String?) {
-        view.showLoading()
+    fun getLastMatch(league: String = "4328") {
+        view!!.showLoading()
         doAsync {
             val data = gson.fromJson(apiRepository
                     .doRequest(TheSportDBApi.getLastMatch(league)),
@@ -23,6 +24,7 @@ class MatchPresenter(private val view: MatchView,
                 view.hideLoading()
                 view.showMatchList(data.match)
             }
+
         }
     }
 }

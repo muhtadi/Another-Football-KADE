@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class Player(
         @SerializedName("idPlayer")
-        var idPlayer: String,
+        var idPlayer: String? = null,
 
         @SerializedName("strPlayer")
-        var strPlayer: String,
+        var strPlayer: String? = null,
 
         @SerializedName("strDescriptionEN")
-        var strDescriptionEN: String,
+        var strDescriptionEN: String? = null,
 
         @SerializedName("strCutout")
-        var strCutout: String
+        var strCutout: String? = null
 
 )
