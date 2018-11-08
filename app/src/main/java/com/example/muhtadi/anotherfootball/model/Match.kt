@@ -1,11 +1,14 @@
 package com.example.muhtadi.anotherfootball.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class Match(
 
         @SerializedName("idEvent")
         var idEvent: String,
+        @SerializedName("dateEvent")
+        var dateEvent: Date,
 
         @SerializedName("idAwayTeam")
         var idAwayTeam: String,
