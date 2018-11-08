@@ -15,7 +15,7 @@ import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.R.array.league
 import com.example.muhtadi.anotherfootball.R.color.colorAccent
 import com.example.muhtadi.anotherfootball.api.ApiRepository
-import com.example.muhtadi.anotherfootball.detail.TeamDetailActivity
+import com.example.muhtadi.anotherfootball.detail_team.TeamDetailActivity
 import com.example.muhtadi.anotherfootball.model.Team
 import com.example.muhtadi.anotherfootball.util.invisible
 import com.example.muhtadi.anotherfootball.util.visible

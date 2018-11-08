@@ -1,6 +1,5 @@
-package com.example.muhtadi.anotherfootball.detail
+package com.example.muhtadi.anotherfootball.detail_team
 
-import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +7,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.Gravity
 import android.view.Menu
-import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -23,10 +21,6 @@ import com.example.muhtadi.anotherfootball.util.visible
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
-import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.delete
-import org.jetbrains.anko.db.insert
-import org.jetbrains.anko.db.select
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 

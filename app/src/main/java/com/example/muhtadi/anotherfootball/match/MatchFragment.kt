@@ -2,7 +2,6 @@ package com.example.muhtadi.anotherfootball.match
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -15,12 +14,10 @@ import android.widget.*
 
 import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.api.ApiRepository
-import com.example.muhtadi.anotherfootball.detail.TeamDetailActivity
+import com.example.muhtadi.anotherfootball.detail_team.TeamDetailActivity
 import com.example.muhtadi.anotherfootball.model.Match
 import com.example.muhtadi.anotherfootball.model.Team
-import com.example.muhtadi.anotherfootball.teams.TeamsAdapter
 import com.example.muhtadi.anotherfootball.teams.TeamsPresenter
-import com.example.muhtadi.anotherfootball.teams.TeamsView
 import com.example.muhtadi.anotherfootball.util.invisible
 import com.example.muhtadi.anotherfootball.util.visible
 import com.google.gson.Gson
