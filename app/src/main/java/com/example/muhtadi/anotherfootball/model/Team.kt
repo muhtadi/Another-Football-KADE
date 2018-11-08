@@ -4,20 +4,20 @@ import com.google.gson.annotations.SerializedName
 
 data class Team(
         @SerializedName("idTeam")
-        var teamId: String? = null,
+        var idTeam: String? = null,
 
         @SerializedName("strTeam")
-        var teamName: String? = null,
+        var strTeam: String? = null,
 
         @SerializedName("strTeamBadge")
-        var teamBadge: String? = null,
+        var strTeamBadge: String? = null,
 
         @SerializedName("intFormedYear")
-        var teamFormedYear: String? = null,
+        var intFormedYear: String? = null,
 
         @SerializedName("strStadium")
-        var teamStadium: String? = null,
+        var strStadium: String? = null,
 
         @SerializedName("strDescriptionEN")
-        var teamDescription: String? = null
+        var strDescriptionEN: String? = null
 )
