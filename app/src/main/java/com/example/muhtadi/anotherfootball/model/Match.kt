@@ -5,24 +5,24 @@ import com.google.gson.annotations.SerializedName
 data class Match(
 
         @SerializedName("idEvent")
-        var idEvent: String,
+        var idEvent: String? = null,
 
         @SerializedName("idAwayTeam")
-        var idAwayTeam: String,
+        var idAwayTeam: String? = null,
         @SerializedName("strAwayTeam")
-        var strAwayTeam: String,
+        var strAwayTeam: String? = null,
         @SerializedName("intAwayScore")
-        var intAwayScore: String,
+        var intAwayScore: String? = null,
         @SerializedName("strAwayGoalDetails")
-        var strAwayGoalDetails: String,
+        var strAwayGoalDetails: String? = null,
 
         @SerializedName("idHomeTeam")
-        var idHomeTeam: String,
+        var idHomeTeam: String? = null,
         @SerializedName("strHomeTeam")
-        var strHomeTeam: String,
+        var strHomeTeam: String? = null,
         @SerializedName("intHomeScore")
-        var intHomeScore: String,
+        var intHomeScore: String? = null,
         @SerializedName("strHomeGoalDetails")
-        var strHomeGoalDetails: String
+        var strHomeGoalDetails: String? = null
 
 )
