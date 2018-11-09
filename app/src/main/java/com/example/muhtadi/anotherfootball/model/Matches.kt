@@ -2,7 +2,7 @@ package com.example.muhtadi.anotherfootball.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Match(
+data class Matches(
 
         @SerializedName("idEvent")
         var idEvent: String? = null,

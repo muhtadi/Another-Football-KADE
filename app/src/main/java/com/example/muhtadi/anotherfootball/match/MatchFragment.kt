@@ -14,8 +14,7 @@ import android.widget.*
 
 import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.api.ApiRepository
-import com.example.muhtadi.anotherfootball.detail.TeamDetailActivity
-import com.example.muhtadi.anotherfootball.model.Team
+import com.example.muhtadi.anotherfootball.model.Matches
 import com.example.muhtadi.anotherfootball.util.invisible
 import com.example.muhtadi.anotherfootball.util.visible
 import com.google.gson.Gson
@@ -26,7 +25,7 @@ import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class MatchFragment : Fragment(), AnkoComponent<Context>, MatchView{
 
-    private var teams: MutableList<Team> = mutableListOf()
+    private var matches: MutableList<Matches> = mutableListOf()
     private lateinit var presenter: MatchPresenter
     private lateinit var adapter: MatchAdapter
     private lateinit var spinner: Spinner
@@ -43,8 +42,8 @@ class MatchFragment : Fragment(), AnkoComponent<Context>, MatchView{
         val spinnerAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item, spinnerItems)
         spinner.adapter = spinnerAdapter
 
-        adapter = MatchAdapter(teams) {
-            context?.startActivity<TeamDetailActivity>("id" to "${it.idTeam}")
+        adapter = MatchAdapter(matches) {
+            //context?.startActivity<TeamDetailActivity>("id" to "${it.idEvent}")
         }
         listEvent.adapter = adapter
 
@@ -54,15 +53,22 @@ class MatchFragment : Fragment(), AnkoComponent<Context>, MatchView{
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 leagueName = spinner.selectedItem.toString()
-                presenter.getTeamList(leagueName)
+                when(leagueName){
+                    "English Premier League" -> presenter.getMatchList("4328")
+                    "German Bundesliga" -> presenter.getMatchList("4331")
+                    "Italian Serie A" -> presenter.getMatchList("4332")
+                    "French Ligue 1" -> presenter.getMatchList("4334")
+                    "Spanish La Liga" -> presenter.getMatchList("4335")
+                    else -> presenter.getMatchList("4328")
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        swipeRefresh.onRefresh {
-            presenter.getTeamList(leagueName)
-        }
+//        swipeRefresh.onRefresh {
+//            presenter.getMatchList(leagueName)
+//        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -113,10 +119,10 @@ class MatchFragment : Fragment(), AnkoComponent<Context>, MatchView{
         progressBar.invisible()
     }
 
-    override fun showTeamList(data: List<Team>) {
+    override fun showMatchList(datas: List<Matches>) {
         swipeRefresh.isRefreshing = false
-        teams.clear()
-        teams.addAll(data)
+        matches.clear()
+        matches.addAll(datas)
         adapter.notifyDataSetChanged()
     }
 

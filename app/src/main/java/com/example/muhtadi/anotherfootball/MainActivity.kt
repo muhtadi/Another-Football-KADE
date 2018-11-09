@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                match -> {
+                matches -> {
                     loadMatchFragment(savedInstanceState)
                 }
                 teams -> {

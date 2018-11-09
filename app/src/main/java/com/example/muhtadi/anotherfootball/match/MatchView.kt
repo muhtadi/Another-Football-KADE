@@ -1,10 +1,9 @@
 package com.example.muhtadi.anotherfootball.match
 
-import com.example.muhtadi.anotherfootball.model.Match
-import com.example.muhtadi.anotherfootball.model.Team
+import com.example.muhtadi.anotherfootball.model.Matches
 
 interface MatchView {
     fun showLoading()
     fun hideLoading()
-    fun showTeamList(data: List<Team>)
+    fun showMatchList(datas: List<Matches>)
 }
