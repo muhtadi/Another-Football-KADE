@@ -15,8 +15,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.R.color.colorAccent
+import com.example.muhtadi.anotherfootball.R.id.add_to_favorites
 import com.example.muhtadi.anotherfootball.R.menu.favorites_menu
 import com.example.muhtadi.anotherfootball.api.ApiRepository
+import com.example.muhtadi.anotherfootball.db.FavoriteTeamContract
+import com.example.muhtadi.anotherfootball.db.database
 import com.example.muhtadi.anotherfootball.model.Team
 import com.example.muhtadi.anotherfootball.util.invisible
 import com.example.muhtadi.anotherfootball.util.visible
@@ -108,7 +111,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
             }
         }
 
-        //favoriteState()
+        favoriteState()
         val request = ApiRepository()
         val gson = Gson()
         presenter = TeamDetailPresenter(this, request, gson)
@@ -119,15 +122,15 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         }
     }
 
-//    private fun favoriteState(){
-//        database.use {
-//            val result = select(Favorite.TABLE_FAVORITE)
-//                    .whereArgs("(TEAM_ID = {id})",
-//                            "id" to id)
-//            val favorite = result.parseList(classParser<Favorite>())
-//            if (!favorite.isEmpty()) isFavorite = true
-//        }
-//    }
+    private fun favoriteState(){
+        database.use {
+            val result = select(FavoriteTeamContract.TABLE_FAVORITE)
+                    .whereArgs("(TEAM_ID = {id})",
+                            "id" to id)
+            val favorite = result.parseList(classParser<FavoriteTeamContract>())
+            if (!favorite.isEmpty()) isFavorite = true
+        }
+    }
 
     override fun showLoading() {
         progressBar.visible()
@@ -157,55 +160,55 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         return true
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            android.R.id.home -> {
-//                finish()
-//                true
-//            }
-//            add_to_favorite -> {
-//                if (isFavorite) removeFromFavorite() else addToFavorite()
-//
-//                isFavorite = !isFavorite
-//                setFavorite()
-//
-//                true
-//            }
-//
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
-//
-//    private fun addToFavorite(){
-//        try {
-//            database.use {
-//                insert(Favorite.TABLE_FAVORITE,
-//                        Favorite.TEAM_ID to teams.teamId,
-//                        Favorite.TEAM_NAME to teams.teamName,
-//                        Favorite.TEAM_BADGE to teams.teamBadge)
-//            }
-//            //swipeRefresh.snackbar("Added to favorite").show()
-//            toast("Added to favorite")
-//
-//        } catch (e: SQLiteConstraintException){
-//            //swipeRefresh.snackbar(e.localizedMessage).show()
-//            toast(e.localizedMessage)
-//        }
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            add_to_favorites -> {
+                if (isFavorite) removeFromFavorite() else addToFavorite()
 
-//    private fun removeFromFavorite(){
-//        try {
-//            database.use {
-//                delete(Favorite.TABLE_FAVORITE, "(TEAM_ID = {id})",
-//                        "id" to id)
-//            }
-//            //swipeRefresh.snackbar( "Removed to favorite").show()
-//            toast("Removed to favorite")
-//        } catch (e: SQLiteConstraintException){
-//            //swipeRefresh.snackbar(e.localizedMessage).show()
-//            toast(e.localizedMessage)
-//        }
-//    }
+                isFavorite = !isFavorite
+                setFavorite()
+
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun addToFavorite(){
+        try {
+            database.use {
+                insert(FavoriteTeamContract.TABLE_FAVORITE,
+                        FavoriteTeamContract.TEAM_ID to teams.idTeam,
+                        FavoriteTeamContract.TEAM_NAME to teams.strTeam,
+                        FavoriteTeamContract.TEAM_BADGE to teams.strTeamBadge)
+            }
+            //swipeRefresh.snackbar("Added to favorite").show()
+            toast("Added to favorite")
+
+        } catch (e: SQLiteConstraintException){
+            //swipeRefresh.snackbar(e.localizedMessage).show()
+            toast(e.localizedMessage)
+        }
+    }
+
+    private fun removeFromFavorite(){
+        try {
+            database.use {
+                delete(FavoriteTeamContract.TABLE_FAVORITE, "(TEAM_ID = {id})",
+                        "id" to id)
+            }
+            //swipeRefresh.snackbar( "Removed to favorite").show()
+            toast("Removed to favorite")
+        } catch (e: SQLiteConstraintException){
+            //swipeRefresh.snackbar(e.localizedMessage).show()
+            toast(e.localizedMessage)
+        }
+    }
 
     private fun setFavorite() {
         if (isFavorite)

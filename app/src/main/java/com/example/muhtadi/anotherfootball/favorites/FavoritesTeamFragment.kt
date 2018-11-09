@@ -23,7 +23,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
+class FavoritesTeamFragment: Fragment(), AnkoComponent<Context> {
     private var favorites: MutableList<FavoriteTeamContract> = mutableListOf()
     private lateinit var adapter: FavoriteTeamsAdapter
     private lateinit var listEvent: RecyclerView
