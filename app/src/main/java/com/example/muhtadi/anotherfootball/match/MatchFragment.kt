@@ -66,9 +66,16 @@ class MatchFragment : Fragment(), AnkoComponent<Context>, MatchView{
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-//        swipeRefresh.onRefresh {
-//            presenter.getMatchList(leagueName)
-//        }
+        swipeRefresh.onRefresh {
+            when(leagueName){
+                "English Premier League" -> presenter.getMatchList("4328")
+                "German Bundesliga" -> presenter.getMatchList("4331")
+                "Italian Serie A" -> presenter.getMatchList("4332")
+                "French Ligue 1" -> presenter.getMatchList("4334")
+                "Spanish La Liga" -> presenter.getMatchList("4335")
+                else -> presenter.getMatchList("4328")
+            }
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
