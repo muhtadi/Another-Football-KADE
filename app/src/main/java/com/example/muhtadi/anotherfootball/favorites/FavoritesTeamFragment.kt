@@ -45,7 +45,7 @@ class FavoritesTeamFragment: Fragment(), AnkoComponent<Context> {
     private fun showFavorite(){
         context?.database?.use {
             swipeRefresh.isRefreshing = false
-            val result = select(FavoriteTeamContract.TABLE_FAVORITE)
+            val result = select(FavoriteTeamContract.TABLE_TEAM_FAVORITE)
             val favorite = result.parseList(classParser<FavoriteTeamContract>())
             favorites.addAll(favorite)
             adapter.notifyDataSetChanged()

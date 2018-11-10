@@ -124,7 +124,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
     private fun favoriteState(){
         database.use {
-            val result = select(FavoriteTeamContract.TABLE_FAVORITE)
+            val result = select(FavoriteTeamContract.TABLE_TEAM_FAVORITE)
                     .whereArgs("(TEAM_ID = {id})",
                             "id" to id)
             val favorite = result.parseList(classParser<FavoriteTeamContract>())
@@ -182,7 +182,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private fun addToFavorite(){
         try {
             database.use {
-                insert(FavoriteTeamContract.TABLE_FAVORITE,
+                insert(FavoriteTeamContract.TABLE_TEAM_FAVORITE,
                         FavoriteTeamContract.TEAM_ID to teams.idTeam,
                         FavoriteTeamContract.TEAM_NAME to teams.strTeam,
                         FavoriteTeamContract.TEAM_BADGE to teams.strTeamBadge)
@@ -199,7 +199,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private fun removeFromFavorite(){
         try {
             database.use {
-                delete(FavoriteTeamContract.TABLE_FAVORITE, "(TEAM_ID = {id})",
+                delete(FavoriteTeamContract.TABLE_TEAM_FAVORITE, "(TEAM_ID = {id})",
                         "id" to id)
             }
             //swipeRefresh.snackbar( "Removed to favorite").show()
