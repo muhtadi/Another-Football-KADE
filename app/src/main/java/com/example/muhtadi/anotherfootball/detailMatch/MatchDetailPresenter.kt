@@ -27,4 +27,34 @@ class MatchDetailPresenter(private val view: MatchDetailView,
             }
         }
     }
+
+    fun getHomeBadge(id: String) {
+        view.showLoading()
+        doAsync{
+            val data = gson.fromJson(apiRepository
+                    .doRequest(TheSportDBApi.getTeamDetail(id)),
+                    TeamResponse::class.java
+            )
+
+            uiThread {
+                view.hideLoading()
+                view.showHomeBadge(data.teams)
+            }
+        }
+    }
+
+    fun getAwayBadge(id: String) {
+        view.showLoading()
+        doAsync{
+            val data = gson.fromJson(apiRepository
+                    .doRequest(TheSportDBApi.getTeamDetail(id)),
+                    TeamResponse::class.java
+            )
+
+            uiThread {
+                view.hideLoading()
+                view.showAwayBadge(data.teams)
+            }
+        }
+    }
 }

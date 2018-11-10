@@ -36,6 +36,7 @@ import org.jetbrains.anko.support.v4.swipeRefreshLayout
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     private lateinit var presenter: MatchDetailPresenter
     private lateinit var matches: Matches
+    private lateinit var teams: Team
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
 
@@ -88,6 +89,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                             lparams(width = matchParent, height = wrapContent)
                             padding = dip(10)
                             orientation = LinearLayout.VERTICAL
+                            gravity = Gravity.CENTER_HORIZONTAL
 
                             dateEvents = textView {
                                 this.gravity = Gravity.CENTER
@@ -120,7 +122,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                                 textSize = 15f
                             }.lparams{
                                 topMargin = dip(3)
-                                bottomMargin = dip(3)
+                                bottomMargin = dip(15)
                             }
 
                             awayBadge= imageView {  }.lparams(height=dip(75))
@@ -164,9 +166,13 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val gson = Gson()
         presenter = MatchDetailPresenter(this, request, gson)
         presenter.getMatchDetail(matchId)
+        presenter.getHomeBadge(homeId)
+        presenter.getAwayBadge(awayId)
 
         swipeRefresh.onRefresh {
             presenter.getMatchDetail(matchId)
+            presenter.getHomeBadge(homeId)
+            presenter.getAwayBadge(awayId)
         }
     }
 
@@ -209,6 +215,20 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         awayTeam.text = data[0].strAwayTeam
         awayScore.text = data[0].intAwayScore
         awayGoaler.text = data[0].strAwayGoalDetails
+    }
+
+    override fun showHomeBadge(data: List<Team>) {
+        teams = Team(data[0].idTeam,
+                data[0].strTeamBadge)
+        swipeRefresh.isRefreshing = false
+        Picasso.get().load(data[0].strTeamBadge).into(homeBadge)
+    }
+
+    override fun showAwayBadge(data: List<Team>) {
+        teams = Team(data[0].idTeam,
+                data[0].strTeamBadge)
+        swipeRefresh.isRefreshing = false
+        Picasso.get().load(data[0].strTeamBadge).into(awayBadge)
     }
 
 //    override fun showTeamDetail(data: List<Team>) {
