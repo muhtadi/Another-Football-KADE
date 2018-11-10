@@ -14,6 +14,7 @@ import android.widget.*
 
 import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.api.ApiRepository
+import com.example.muhtadi.anotherfootball.detailMatch.MatchDetailActivity
 import com.example.muhtadi.anotherfootball.model.Matches
 import com.example.muhtadi.anotherfootball.util.invisible
 import com.example.muhtadi.anotherfootball.util.visible
@@ -43,7 +44,10 @@ class MatchFragment : Fragment(), AnkoComponent<Context>, MatchView{
         spinner.adapter = spinnerAdapter
 
         adapter = MatchAdapter(matches) {
-            //context?.startActivity<TeamDetailActivity>("id" to "${it.idEvent}")
+            context?.startActivity<MatchDetailActivity>(
+                    "matchId" to "${it.idEvent}",
+                    "awayTeamId" to "${it.idAwayTeam}",
+                    "homeTeamId" to "${it.idHomeTeam}")
         }
         listEvent.adapter = adapter
 

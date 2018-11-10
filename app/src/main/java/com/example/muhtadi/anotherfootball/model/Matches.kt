@@ -6,6 +6,8 @@ data class Matches(
 
         @SerializedName("idEvent")
         var idEvent: String? = null,
+        @SerializedName("dateEvent")
+        var dateEvent: String? = null,
 
         @SerializedName("idAwayTeam")
         var idAwayTeam: String? = null,

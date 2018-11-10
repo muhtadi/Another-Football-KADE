@@ -1,7 +1,6 @@
 package com.example.muhtadi.anotherfootball.favorites
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -11,11 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.R.color.colorAccent
 import com.example.muhtadi.anotherfootball.db.FavoriteTeamContract
 import com.example.muhtadi.anotherfootball.db.database
-import com.example.muhtadi.anotherfootball.detail.TeamDetailActivity
+import com.example.muhtadi.anotherfootball.detailTeam.TeamDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select

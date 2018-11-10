@@ -39,4 +39,29 @@ object TheSportDBApi {
                 .build()
                 .toString()
     }
+
+    fun getNextMatch(leagueId: String?):String{
+        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
+                .appendPath("api")
+                .appendPath("v1")
+                .appendPath("json")
+                .appendPath(BuildConfig.TSDB_API_KEY)
+                .appendPath("eventsnextleague.php")
+                .appendQueryParameter("id",leagueId)
+                .build()
+                .toString()
+    }
+
+    fun getMatch(eventId: String?):String{
+        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
+                .appendPath("api")
+                .appendPath("v1")
+                .appendPath("json")
+                .appendPath(BuildConfig.TSDB_API_KEY)
+                .appendPath("lookupevent.php")
+                .appendQueryParameter("id",eventId)
+                .build()
+                .toString()
+    }
+
 }

@@ -27,43 +27,54 @@ class MatchAdapter(private val matches: List<Matches>, private val listener: (Ma
 class TeamUI : AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View {
         return with(ui) {
-            linearLayout {
+            linearLayout{
                 lparams(width = matchParent, height = wrapContent)
-                padding = dip(16)
-                orientation = LinearLayout.HORIZONTAL
+                padding = dip(10)
+                orientation = LinearLayout.VERTICAL
 
                 textView {
-                    id = R.id.home_name
+                    id = R.id.match_date
                     textSize = 16f
                 }.lparams{
-                    margin = dip(15)
+                    margin = dip(4)
                 }
 
-                textView {
-                    id = R.id.home_score
-                    textSize = 16f
-                }.lparams{
-                    margin = dip(15)
-                }
+                linearLayout {
+                    lparams(width = matchParent, height = wrapContent)
+                    padding = dip(4)
+                    orientation = LinearLayout.HORIZONTAL
 
-                textView {
-                    id = R.id.away_score
-                    textSize = 16f
-                }.lparams{
-                    margin = dip(15)
-                }
+                    textView {
+                        id = R.id.home_name
+                        textSize = 16f
+                    }.lparams{
+                        margin = dip(2)
+                    }
 
-                textView {
-                    id = R.id.away_name
-                    textSize = 16f
-                }.lparams{
-                    margin = dip(15)
-                }
+                    textView {
+                        id = R.id.home_score
+                        textSize = 16f
+                    }.lparams{
+                        margin = dip(2)
+                    }
 
+                    textView {
+                        id = R.id.away_score
+                        textSize = 16f
+                    }.lparams{
+                        margin = dip(2)
+                    }
+
+                    textView {
+                        id = R.id.away_name
+                        textSize = 16f
+                    }.lparams{
+                        margin = dip(2)
+                    }
+                }
             }
         }
     }
-
 }
 
 class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -72,7 +83,7 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val homeScore: TextView = view.find(R.id.home_score)
     private val awayName: TextView = view.find(R.id.away_name)
     private val awayScore: TextView = view.find(R.id.away_score)
-    //private val matchDate: TextView = view.find(R.id.match_date)
+    private val matchDate: TextView = view.find(R.id.match_date)
 
 
     fun bindItem(matches: Matches, listener: (Matches) -> Unit) {
@@ -80,7 +91,7 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
         homeScore.text = matches.intHomeScore
         awayName.text = matches.strAwayTeam
         awayScore.text = matches.intAwayScore
-        //matchDate.text = matches.str
+        matchDate.text = matches.dateEvent
 
         itemView.setOnClickListener { listener(matches) }
     }

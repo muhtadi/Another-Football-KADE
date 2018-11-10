@@ -1,4 +1,4 @@
-package com.example.muhtadi.anotherfootball.detail
+package com.example.muhtadi.anotherfootball.detailTeam
 
 import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
