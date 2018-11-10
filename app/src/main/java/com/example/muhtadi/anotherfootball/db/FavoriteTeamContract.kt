@@ -1,6 +1,10 @@
 package com.example.muhtadi.anotherfootball.db
 
-data class FavoriteTeamContract(val id: Long?, val teamId: String?, val teamName: String?, val teamBadge: String?) {
+data class FavoriteTeamContract(
+        val id: Long?,
+        val teamId: String?,
+        val teamName: String?,
+        val teamBadge: String?) {
 
     companion object {
         const val TABLE_TEAM_FAVORITE: String = "TABLE_TEAM_FAVORITE"

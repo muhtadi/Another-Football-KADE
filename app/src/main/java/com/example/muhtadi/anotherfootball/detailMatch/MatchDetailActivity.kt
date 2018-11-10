@@ -162,7 +162,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
             }
         }
 
-        //favoriteState()
+        favoriteState()
         val request = ApiRepository()
         val gson = Gson()
         presenter = MatchDetailPresenter(this, request, gson)
@@ -263,10 +263,12 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
             database.use {
                 insert(FavoriteMatchContract.TABLE_MATCH_FAVORITE,
                         FavoriteMatchContract.MATCH_ID to matches.idEvent,
-                        FavoriteMatchContract.DATE_MATCH to matches.dateEvent,
-                        FavoriteMatchContract.HOME_NAME to matches.strHomeTeam,
+                        FavoriteMatchContract.DATE_EVENT to matches.dateEvent,
+                        FavoriteMatchContract.HOME_ID to matches.idHomeTeam,
+                        FavoriteMatchContract.HOME_TEAM to matches.strHomeTeam,
                         FavoriteMatchContract.HOME_SCORE to matches.intHomeScore,
-                        FavoriteMatchContract.AWAY_NAME to matches.strAwayTeam,
+                        FavoriteMatchContract.AWAY_ID to matches.idAwayTeam,
+                        FavoriteMatchContract.AWAY_TEAM to matches.strAwayTeam,
                         FavoriteMatchContract.AWAY_SCORE to matches.intAwayScore)
             }
             //swipeRefresh.snackbar("Added to favorite").show()

@@ -86,7 +86,6 @@ class MatchFragment : Fragment(), AnkoComponent<Context>, MatchView{
         return createView(AnkoContext.create(requireContext()))
     }
 
-    @SuppressLint("ResourceType")
     override fun createView(ui: AnkoContext<Context>): View = with(ui){
         linearLayout {
             lparams (width = matchParent, height = wrapContent)

@@ -28,10 +28,12 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "Favorit
         db.createTable(FavoriteMatchContract.TABLE_MATCH_FAVORITE,true,
                 FavoriteMatchContract.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
                 FavoriteMatchContract.MATCH_ID to TEXT + UNIQUE,
-                FavoriteMatchContract.DATE_MATCH to TEXT,
-                FavoriteMatchContract.HOME_NAME to TEXT,
+                FavoriteMatchContract.DATE_EVENT to TEXT,
+                FavoriteMatchContract.HOME_ID to TEXT,
+                FavoriteMatchContract.HOME_TEAM to TEXT,
                 FavoriteMatchContract.HOME_SCORE to TEXT,
-                FavoriteMatchContract.AWAY_NAME to TEXT,
+                FavoriteMatchContract.AWAY_ID to TEXT,
+                FavoriteMatchContract.AWAY_TEAM to TEXT,
                 FavoriteMatchContract.AWAY_SCORE to TEXT)
     }
 
