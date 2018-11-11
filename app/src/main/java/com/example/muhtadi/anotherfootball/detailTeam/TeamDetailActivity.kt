@@ -20,11 +20,15 @@ import com.example.muhtadi.anotherfootball.R.menu.favorites_menu
 import com.example.muhtadi.anotherfootball.api.ApiRepository
 import com.example.muhtadi.anotherfootball.db.FavoriteTeamContract
 import com.example.muhtadi.anotherfootball.db.database
+import com.example.muhtadi.anotherfootball.detailTeam.Players.PlayersFragment
+import com.example.muhtadi.anotherfootball.detailTeam.TeamOverview.TeamOverviewFragment
+import com.example.muhtadi.anotherfootball.favorites.ViewPagerAdapter
 import com.example.muhtadi.anotherfootball.model.Team
 import com.example.muhtadi.anotherfootball.util.invisible
 import com.example.muhtadi.anotherfootball.util.visible
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_team_detail.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
@@ -37,7 +41,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private lateinit var presenter: TeamDetailPresenter
     private lateinit var teams: Team
     private lateinit var progressBar: ProgressBar
-    private lateinit var swipeRefresh: SwipeRefreshLayout
+    //private lateinit var swipeRefresh: SwipeRefreshLayout
 
     private lateinit var teamBadge: ImageView
     private lateinit var teamName: TextView
@@ -51,65 +55,79 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_team_detail)
+
+        val adapter = ViewPagerAdapter(supportFragmentManager)
+        val teamOverviewFragment = TeamOverviewFragment()
+        val playersFragment = PlayersFragment()
+        //teamOverviewFragment.arguments = bundle
+        //playersFragment.arguments = bundle
+        adapter.populateFragment(teamOverviewFragment, "Team Overview")
+        adapter.populateFragment(playersFragment, "Players")
+
+        team_viewpager.adapter = adapter
+        team_tabs.setupWithViewPager(team_viewpager)
 
         val intent = intent
         id = intent.getStringExtra("id")
         supportActionBar?.title = "Team Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        linearLayout {
-            lparams(width = matchParent, height = wrapContent)
-            orientation = LinearLayout.VERTICAL
-            backgroundColor = Color.WHITE
+        progressBar = teamProgressBar
 
-            swipeRefresh = swipeRefreshLayout {
-                setColorSchemeResources(colorAccent,
-                        android.R.color.holo_green_light,
-                        android.R.color.holo_orange_light,
-                        android.R.color.holo_red_light)
-
-                scrollView {
-                    isVerticalScrollBarEnabled = false
-                    relativeLayout {
-                        lparams(width = matchParent, height = wrapContent)
-
-                        linearLayout{
-                            lparams(width = matchParent, height = wrapContent)
-                            padding = dip(10)
-                            orientation = LinearLayout.VERTICAL
-                            gravity = Gravity.CENTER_HORIZONTAL
-
-                            teamBadge =  imageView {}.lparams(height = dip(75))
-
-                            teamName = textView{
-                                this.gravity = Gravity.CENTER
-                                textSize = 20f
-                                textColor = ContextCompat.getColor(context, colorAccent)
-                            }.lparams{
-                                topMargin = dip(5)
-                            }
-
-                            teamFormedYear = textView{
-                                this.gravity = Gravity.CENTER
-                            }
-
-                            teamStadium = textView{
-                                this.gravity = Gravity.CENTER
-
-                            }
-
-                            teamDescription = textView().lparams{
-                                topMargin = dip(20)
-                            }
-                        }
-                        progressBar = progressBar {
-                        }.lparams {
-                            centerHorizontally()
-                        }
-                    }
-                }
-            }
-        }
+//        linearLayout {
+//            lparams(width = matchParent, height = wrapContent)
+//            orientation = LinearLayout.VERTICAL
+//            backgroundColor = Color.WHITE
+//
+//            swipeRefresh = swipeRefreshLayout {
+//                setColorSchemeResources(colorAccent,
+//                        android.R.color.holo_green_light,
+//                        android.R.color.holo_orange_light,
+//                        android.R.color.holo_red_light)
+//
+//                scrollView {
+//                    isVerticalScrollBarEnabled = false
+//                    relativeLayout {
+//                        lparams(width = matchParent, height = wrapContent)
+//
+//                        linearLayout{
+//                            lparams(width = matchParent, height = wrapContent)
+//                            padding = dip(10)
+//                            orientation = LinearLayout.VERTICAL
+//                            gravity = Gravity.CENTER_HORIZONTAL
+//
+//                            teamBadge =  imageView {}.lparams(height = dip(75))
+//
+//                            teamName = textView{
+//                                this.gravity = Gravity.CENTER
+//                                textSize = 20f
+//                                textColor = ContextCompat.getColor(context, colorAccent)
+//                            }.lparams{
+//                                topMargin = dip(5)
+//                            }
+//
+//                            teamFormedYear = textView{
+//                                this.gravity = Gravity.CENTER
+//                            }
+//
+//                            teamStadium = textView{
+//                                this.gravity = Gravity.CENTER
+//
+//                            }
+//
+//                            teamDescription = textView().lparams{
+//                                topMargin = dip(20)
+//                            }
+//                        }
+//                        progressBar = progressBar {
+//                        }.lparams {
+//                            centerHorizontally()
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         favoriteState()
         val request = ApiRepository()
@@ -117,9 +135,9 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         presenter = TeamDetailPresenter(this, request, gson)
         presenter.getTeamDetail(id)
 
-        swipeRefresh.onRefresh {
-            presenter.getTeamDetail(id)
-        }
+//        swipeRefresh.onRefresh {
+//            presenter.getTeamDetail(id)
+//        }
     }
 
     private fun favoriteState(){
@@ -144,12 +162,12 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         teams = Team(data[0].idTeam,
                 data[0].strTeam,
                 data[0].strTeamBadge)
-        swipeRefresh.isRefreshing = false
-        Picasso.get().load(data[0].strTeamBadge).into(teamBadge)
-        teamName.text = data[0].strTeam
-        teamDescription.text = data[0].strDescriptionEN
-        teamFormedYear.text = data[0].intFormedYear
-        teamStadium.text = data[0].strStadium
+        //swipeRefresh.isRefreshing = false
+        //Picasso.get().load(data[0].strTeamBadge).into(teamBadge)
+        //teamName.text = data[0].strTeam
+        //teamDescription.text = data[0].strDescriptionEN
+        //teamFormedYear.text = data[0].intFormedYear
+        //teamStadium.text = data[0].strStadium
 
     }
 

@@ -13,4 +13,8 @@
     <item name="away_name" type="id"/>
     <item name="away_score" type="id"/>
     <item name="match_date" type="id"/>
+
+    <item name="player_image" type="id"/>
+    <item name="player_name" type="id"/>
+    <item name="listPlayer" type="id"/>
 </resources>
