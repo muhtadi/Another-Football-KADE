@@ -7,9 +7,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.SearchView
+import android.view.*
 import android.widget.*
 import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.R.array.league
@@ -39,7 +38,7 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
+        setHasOptionsMenu(true)
         val spinnerItems = resources.getStringArray(league)
         val spinnerAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item, spinnerItems)
         spinner.adapter = spinnerAdapter
@@ -104,6 +103,31 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.search_menu, menu)
+        val searchView = menu?.findItem(R.id.actionSearch)?.actionView as SearchView?
+        searchView?.queryHint = "Search team"
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                presenter.getTeamByName(newText)
+                return false
+            }
+        })
+
+        searchView?.setOnCloseListener(object: SearchView.OnCloseListener{
+            override fun onClose(): Boolean {
+                presenter.getTeamList("4328")
+                return true
+            }
+        })
     }
 
     override fun showLoading() {
