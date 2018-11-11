@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.muhtadi.anotherfootball.R.id.*
 import com.example.muhtadi.anotherfootball.R.layout.activity_main
+import com.example.muhtadi.anotherfootball.favorites.FavoriteFragment
 import com.example.muhtadi.anotherfootball.favorites.FavoritesMatchFragment
 import com.example.muhtadi.anotherfootball.favorites.FavoritesTeamFragment
 import com.example.muhtadi.anotherfootball.match.MatchFragment
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.main_container, FavoritesMatchFragment(), FavoritesMatchFragment::class.java.simpleName)
+                    .replace(R.id.main_container, FavoriteFragment(), FavoriteFragment::class.java.simpleName)
                     .commit()
         }
     }
