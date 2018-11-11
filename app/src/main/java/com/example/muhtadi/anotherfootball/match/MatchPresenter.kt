@@ -11,11 +11,26 @@ class MatchPresenter(private val view: MatchView,
                      private val apiRepository: ApiRepository,
                      private val gson: Gson) {
 
-    fun getMatchList(leagueId: String?) {
+    fun getLastMatchList(leagueId: String?) {
         view.showLoading()
         doAsync {
             val datas = gson.fromJson(apiRepository
                     .doRequest(TheSportDBApi.getLastMatch(leagueId)),
+                    MatchesResponse::class.java
+            )
+
+            uiThread {
+                view.hideLoading()
+                view.showMatchList(datas.matches)
+            }
+        }
+    }
+
+    fun getNextMatchList(leagueId: String?) {
+        view.showLoading()
+        doAsync {
+            val datas = gson.fromJson(apiRepository
+                    .doRequest(TheSportDBApi.getNextMatch(leagueId)),
                     MatchesResponse::class.java
             )
 
