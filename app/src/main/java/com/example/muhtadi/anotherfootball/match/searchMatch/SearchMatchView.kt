@@ -1,9 +1,8 @@
-package com.example.muhtadi.anotherfootball.match
-
+package com.example.muhtadi.anotherfootball.match.searchMatch
 
 import com.example.muhtadi.anotherfootball.model.Matches
 
-interface MatchView {
+interface SearchMatchView {
     fun showLoading()
     fun hideLoading()
     fun showMatchList(data: List<Matches>)

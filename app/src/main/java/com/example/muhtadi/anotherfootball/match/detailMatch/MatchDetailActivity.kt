@@ -1,4 +1,4 @@
-package com.example.muhtadi.anotherfootball.detailMatch
+package com.example.muhtadi.anotherfootball.match.detailMatch
 
 import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
@@ -16,10 +16,7 @@ import android.widget.TextView
 import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.api.ApiRepository
 import com.example.muhtadi.anotherfootball.db.FavoriteMatchContract
-import com.example.muhtadi.anotherfootball.db.FavoriteTeamContract
 import com.example.muhtadi.anotherfootball.db.database
-import com.example.muhtadi.anotherfootball.detailTeam.TeamDetailPresenter
-import com.example.muhtadi.anotherfootball.detailTeam.TeamDetailView
 import com.example.muhtadi.anotherfootball.model.Matches
 import com.example.muhtadi.anotherfootball.model.Team
 import com.example.muhtadi.anotherfootball.util.invisible

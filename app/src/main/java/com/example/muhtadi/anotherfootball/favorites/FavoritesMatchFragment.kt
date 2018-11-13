@@ -13,7 +13,7 @@ import android.widget.LinearLayout
 import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.db.FavoriteMatchContract
 import com.example.muhtadi.anotherfootball.db.database
-import com.example.muhtadi.anotherfootball.detailMatch.MatchDetailActivity
+import com.example.muhtadi.anotherfootball.match.detailMatch.MatchDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select

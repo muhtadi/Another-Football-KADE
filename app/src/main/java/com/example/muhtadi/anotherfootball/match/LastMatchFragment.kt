@@ -1,6 +1,5 @@
 package com.example.muhtadi.anotherfootball.match
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,7 +13,7 @@ import android.widget.*
 
 import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.api.ApiRepository
-import com.example.muhtadi.anotherfootball.detailMatch.MatchDetailActivity
+import com.example.muhtadi.anotherfootball.match.detailMatch.MatchDetailActivity
 import com.example.muhtadi.anotherfootball.model.Matches
 import com.example.muhtadi.anotherfootball.util.invisible
 import com.example.muhtadi.anotherfootball.util.visible
@@ -129,10 +128,10 @@ class LastMatchFragment : Fragment(), AnkoComponent<Context>, MatchView{
         progressBar.invisible()
     }
 
-    override fun showMatchList(datas: List<Matches>) {
+    override fun showMatchList(data: List<Matches>) {
         swipeRefresh.isRefreshing = false
         matches.clear()
-        matches.addAll(datas)
+        matches.addAll(data)
         adapter.notifyDataSetChanged()
     }
 

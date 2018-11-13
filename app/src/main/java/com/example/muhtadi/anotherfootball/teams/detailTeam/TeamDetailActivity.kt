@@ -1,41 +1,33 @@
-package com.example.muhtadi.anotherfootball.detailTeam
+package com.example.muhtadi.anotherfootball.teams.detailTeam
 
 import android.database.sqlite.SQLiteConstraintException
-import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.muhtadi.anotherfootball.R
-import com.example.muhtadi.anotherfootball.R.color.colorAccent
 import com.example.muhtadi.anotherfootball.R.id.add_to_favorites
 import com.example.muhtadi.anotherfootball.R.menu.favorites_menu
 import com.example.muhtadi.anotherfootball.api.ApiRepository
 import com.example.muhtadi.anotherfootball.db.FavoriteTeamContract
 import com.example.muhtadi.anotherfootball.db.database
-import com.example.muhtadi.anotherfootball.detailTeam.Players.PlayersFragment
-import com.example.muhtadi.anotherfootball.detailTeam.TeamOverview.TeamOverviewFragment
+import com.example.muhtadi.anotherfootball.teams.detailTeam.Players.PlayersFragment
+import com.example.muhtadi.anotherfootball.teams.detailTeam.TeamOverview.TeamOverviewFragment
 import com.example.muhtadi.anotherfootball.favorites.ViewPagerAdapter
 import com.example.muhtadi.anotherfootball.model.Team
 import com.example.muhtadi.anotherfootball.util.invisible
 import com.example.muhtadi.anotherfootball.util.visible
 import com.google.gson.Gson
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private lateinit var presenter: TeamDetailPresenter

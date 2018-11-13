@@ -1,8 +1,7 @@
-package com.example.muhtadi.anotherfootball.detailMatch
+package com.example.muhtadi.anotherfootball.match.detailMatch
 
 import com.example.muhtadi.anotherfootball.api.ApiRepository
 import com.example.muhtadi.anotherfootball.api.TheSportDBApi
-import com.example.muhtadi.anotherfootball.detailTeam.TeamDetailView
 import com.example.muhtadi.anotherfootball.model.MatchesResponse
 import com.example.muhtadi.anotherfootball.model.TeamResponse
 import com.google.gson.Gson

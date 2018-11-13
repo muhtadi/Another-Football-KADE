@@ -14,7 +14,7 @@ import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.R.array.league
 import com.example.muhtadi.anotherfootball.R.color.colorAccent
 import com.example.muhtadi.anotherfootball.api.ApiRepository
-import com.example.muhtadi.anotherfootball.detailTeam.TeamDetailActivity
+import com.example.muhtadi.anotherfootball.teams.detailTeam.TeamDetailActivity
 import com.example.muhtadi.anotherfootball.model.Team
 import com.example.muhtadi.anotherfootball.util.invisible
 import com.example.muhtadi.anotherfootball.util.visible
@@ -124,7 +124,7 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
 
         searchView?.setOnCloseListener(object: SearchView.OnCloseListener{
             override fun onClose(): Boolean {
-                presenter.getTeamList("4328")
+                presenter.getTeamList(leagueName)
                 return true
             }
         })

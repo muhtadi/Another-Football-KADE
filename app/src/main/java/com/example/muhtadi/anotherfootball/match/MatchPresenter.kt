@@ -40,4 +40,5 @@ class MatchPresenter(private val view: MatchView,
             }
         }
     }
+
 }

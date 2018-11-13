@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".detailTeam.TeamDetailActivity"
+            android:name=".teams.detailTeam.TeamDetailActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".detailMatch.MatchDetailActivity" />
-        <activity android:name=".detailPlayer.PlayerDetailActivity"></activity>
-
+        <activity android:name=".match.detailMatch.MatchDetailActivity" />
+        <activity android:name=".detailPlayer.PlayerDetailActivity" />
+        <activity android:name=".match.searchMatch.SearchMatchActivity"></activity>
     </application>
 
 </manifest>

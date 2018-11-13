@@ -1,4 +1,4 @@
-package com.example.muhtadi.anotherfootball.detailMatch
+package com.example.muhtadi.anotherfootball.match.detailMatch
 
 import com.example.muhtadi.anotherfootball.model.Matches
 import com.example.muhtadi.anotherfootball.model.Team

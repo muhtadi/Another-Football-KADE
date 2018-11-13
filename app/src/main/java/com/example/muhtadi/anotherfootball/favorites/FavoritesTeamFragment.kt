@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import com.example.muhtadi.anotherfootball.R.color.colorAccent
 import com.example.muhtadi.anotherfootball.db.FavoriteTeamContract
 import com.example.muhtadi.anotherfootball.db.database
-import com.example.muhtadi.anotherfootball.detailTeam.TeamDetailActivity
+import com.example.muhtadi.anotherfootball.teams.detailTeam.TeamDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select

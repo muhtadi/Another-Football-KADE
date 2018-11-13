@@ -6,6 +6,7 @@ import com.example.muhtadi.anotherfootball.model.TeamResponse
 import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.util.*
 
 class TeamsPresenter(private val view: TeamsView,
                      private val apiRepository: ApiRepository,
@@ -36,7 +37,7 @@ class TeamsPresenter(private val view: TeamsView,
 
             uiThread {
                 view.hideLoading()
-                view.showTeamList(data.teams)
+                view.showTeamList(data.teams?: Collections.emptyList())
             }
         }
     }
