@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.api.ApiRepository
+import com.example.muhtadi.anotherfootball.match.detailMatch.MatchDetailActivity
 import com.example.muhtadi.anotherfootball.model.Matches
 import com.example.muhtadi.anotherfootball.util.invisible
 import com.example.muhtadi.anotherfootball.util.visible
@@ -69,7 +70,12 @@ class SearchMatchActivity : AppCompatActivity(), SearchMatchView{
             }
         }
 
-        adapter = SearchMatchAdapter(matches)
+        adapter = SearchMatchAdapter(matches){
+            ctx.startActivity<MatchDetailActivity>(
+                    "matchId" to "${it.idEvent}",
+                    "homeTeamId" to "${it.idHomeTeam}",
+                    "awayTeamId" to "${it.idAwayTeam}")
+        }
         listEvent.adapter = adapter
 
         val request = ApiRepository()

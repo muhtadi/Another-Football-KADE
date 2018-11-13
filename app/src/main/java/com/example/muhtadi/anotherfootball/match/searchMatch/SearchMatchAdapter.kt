@@ -8,8 +8,9 @@ import android.widget.TextView
 import com.example.muhtadi.anotherfootball.R
 import com.example.muhtadi.anotherfootball.model.Matches
 import org.jetbrains.anko.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
-class SearchMatchAdapter(private val events: List<Matches>)
+class SearchMatchAdapter(private val events: List<Matches>, private val listener: (Matches) -> Unit)
     : RecyclerView.Adapter<SearchMatchViewHolder>() {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SearchMatchViewHolder {
         return SearchMatchViewHolder(TeamUI().createView(AnkoContext.create(p0.context, p0)))
@@ -18,7 +19,7 @@ class SearchMatchAdapter(private val events: List<Matches>)
     override fun getItemCount(): Int = events.size
 
     override fun onBindViewHolder(p0: SearchMatchViewHolder, p1: Int) {
-        p0.bindItem(events[p1])
+        p0.bindItem(events[p1], listener)
     }
 
 }
@@ -83,12 +84,13 @@ class SearchMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val awayScore: TextView = view.find(R.id.away_score)
     private val matchDate: TextView = view.find(R.id.match_date)
 
-    fun bindItem(matches: Matches){
+    fun bindItem(matches: Matches, listener: (Matches) -> Unit){
         homeName.text = matches.strHomeTeam
         homeScore.text = matches.intHomeScore
         awayName.text = matches.strAwayTeam
         awayScore.text = matches.intAwayScore
         matchDate.text = matches.dateEvent
 
+        itemView.onClick { listener(matches) }
     }
 }

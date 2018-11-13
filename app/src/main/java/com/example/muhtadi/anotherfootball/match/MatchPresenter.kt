@@ -6,6 +6,7 @@ import com.example.muhtadi.anotherfootball.model.MatchesResponse
 import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.util.*
 
 class MatchPresenter(private val view: MatchView,
                      private val apiRepository: ApiRepository,
@@ -21,7 +22,7 @@ class MatchPresenter(private val view: MatchView,
 
             uiThread {
                 view.hideLoading()
-                view.showMatchList(datas.matches)
+                view.showMatchList(datas.matches?: Collections.emptyList())
             }
         }
     }
@@ -36,7 +37,7 @@ class MatchPresenter(private val view: MatchView,
 
             uiThread {
                 view.hideLoading()
-                view.showMatchList(datas.matches)
+                view.showMatchList(datas.matches?: Collections.emptyList())
             }
         }
     }

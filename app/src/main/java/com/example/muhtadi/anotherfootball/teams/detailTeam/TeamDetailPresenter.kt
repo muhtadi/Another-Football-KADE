@@ -6,6 +6,7 @@ import com.example.muhtadi.anotherfootball.model.TeamResponse
 import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.util.*
 
 class TeamDetailPresenter(private val view: TeamDetailView,
                           private val apiRepository: ApiRepository,
@@ -21,7 +22,7 @@ class TeamDetailPresenter(private val view: TeamDetailView,
 
             uiThread {
                 view.hideLoading()
-                view.showTeamDetail(data.teams)
+                view.showTeamDetail(data.teams?: Collections.emptyList())
             }
         }
     }

@@ -7,6 +7,7 @@ import com.example.muhtadi.anotherfootball.model.TeamResponse
 import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.util.*
 
 class MatchDetailPresenter(private val view: MatchDetailView,
                           private val apiRepository: ApiRepository,
@@ -37,7 +38,7 @@ class MatchDetailPresenter(private val view: MatchDetailView,
 
             uiThread {
                 view.hideLoading()
-                view.showHomeBadge(data.teams)
+                view.showHomeBadge(data.teams?: Collections.emptyList())
             }
         }
     }
@@ -52,7 +53,7 @@ class MatchDetailPresenter(private val view: MatchDetailView,
 
             uiThread {
                 view.hideLoading()
-                view.showAwayBadge(data.teams)
+                view.showAwayBadge(data.teams?: Collections.emptyList())
             }
         }
     }
