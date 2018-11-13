@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteConstraintException
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -49,21 +50,27 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_team_detail)
 
+        val intent = intent
+        id = intent.getStringExtra("id")
+
+        val bundle = Bundle()
+        bundle.putString("teamId", id)
+
+        supportActionBar?.title = "Team Detail"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val adapter = ViewPagerAdapter(supportFragmentManager)
         val teamOverviewFragment = TeamOverviewFragment()
         val playersFragment = PlayersFragment()
-        //teamOverviewFragment.arguments = bundle
-        //playersFragment.arguments = bundle
+
+        teamOverviewFragment.arguments = bundle
+        playersFragment.arguments = bundle
+
         adapter.populateFragment(teamOverviewFragment, "Team Overview")
         adapter.populateFragment(playersFragment, "Players")
 
         team_viewpager.adapter = adapter
         team_tabs.setupWithViewPager(team_viewpager)
-
-        val intent = intent
-        id = intent.getStringExtra("id")
-        supportActionBar?.title = "Team Detail"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         progressBar = teamProgressBar
 
@@ -226,4 +233,5 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         else
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_black_24dp)
     }
+
 }
