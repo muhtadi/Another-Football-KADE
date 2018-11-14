@@ -31,7 +31,7 @@ class FavoritesTeamFragment: Fragment(), AnkoComponent<Context> {
         super.onActivityCreated(savedInstanceState)
 
         adapter = FavoriteTeamsAdapter(favorites){
-            context?.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
+            context?.startActivity<TeamDetailActivity>("id" to "${it.teamId}", "teamName" to "${it.teamName}")
         }
 
         listEvent.adapter = adapter

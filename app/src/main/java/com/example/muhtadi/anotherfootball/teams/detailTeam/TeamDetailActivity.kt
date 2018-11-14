@@ -45,6 +45,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
     private lateinit var id: String
+    private lateinit var nameT: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,11 +53,12 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
         val intent = intent
         id = intent.getStringExtra("id")
+        nameT = intent.getStringExtra("teamName")
 
         val bundle = Bundle()
         bundle.putString("teamId", id)
 
-        supportActionBar?.title = "Team Detail"
+        supportActionBar?.title = nameT
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val adapter = ViewPagerAdapter(supportFragmentManager)

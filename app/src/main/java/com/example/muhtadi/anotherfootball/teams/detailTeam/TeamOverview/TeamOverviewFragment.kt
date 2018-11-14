@@ -65,6 +65,7 @@ class TeamOverviewFragment : Fragment(),AnkoComponent<Context>, TeamOverviewView
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         val teamid: String? = arguments?.getString("teamId")
         Log.d("myfragment on activity", teamid)
 
